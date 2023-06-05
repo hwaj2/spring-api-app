@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-// @RestController에서 발생하는 전역적으로 발생하는 예외처리를 위한 GlobalExceptionHandler 클래스
+// @RestController에서 전역적으로 발생하는 예외처리를 위한 클래스
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
