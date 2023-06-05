@@ -7,7 +7,7 @@ import org.springframework.validation.FieldError;
 
 import java.util.List;
 
-// 클라이언트에게 일정한 형태의 에러메세지를 반환하기 위한 클래스
+// 클라이언트에게 일정한 형태의 에러메세지를 반환하기 위한 ErrorResponse 클래스
 @Getter
 @Builder
 public class ErrorResponse {
