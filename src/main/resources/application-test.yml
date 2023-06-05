@@ -1,0 +1,7 @@
+spring:
+  datasource: # 메모리 데이터 베이스인 h2를 이용하여 테스트환경에서 개발
+    url: jdbc:h2:mem:api
+    username: sa
+    password: 0000
+    driver-class-name: org.h2.Driver
+
