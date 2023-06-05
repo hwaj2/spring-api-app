@@ -11,8 +11,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
        registry.addMapping("/api/**") // 해당 path pattern으로 오는 요청의 경우 CORS적용
-               .allowedOrigins("*") // 허용되는 리소스
-               .allowedMethods(                         // 허용되는 http method
+               .allowedOrigins("*") // 허용되는 리소스(요청사이트의 url)
+               .allowedMethods(     // 허용되는 http method
                        HttpMethod.GET.name(),
                        HttpMethod.POST.name(),
                        HttpMethod.PUT.name(),
