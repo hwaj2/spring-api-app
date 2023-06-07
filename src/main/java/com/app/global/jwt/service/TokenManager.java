@@ -98,7 +98,7 @@ public class TokenManager {
     }
 
 
-    // [service] 토큰정보를 서버에서 사용하기 위해 payload안에 있는 claim 가져오기
+    // [service] 토큰정보를 서버에서 사용하기 위해 payload안에 있는 claim 정보 가져오기
     public Claims getTokenClaims(String token) {
 
         Claims claims;
