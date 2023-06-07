@@ -49,4 +49,7 @@ kakao:
     id: 4aa8377c7918ab202874d5727e46c43c
     secret: yJIGsT5q8680LdwtBA9vPATmEVgx71Ip
 
-
+token:
+  secret: 9c9uJh1XDJMe72tcz8o94Z1pqQxRrUdKaxFAlScPFuIGZtp57tFR3Q # 임의의 문자열
+  access-token-expiration-time: 900000  # 15분 : 1000(ms) x 60(s) x 15(m)
+  refresh-token-expiration-time: 1209600000 # 2주 : 1000(ms) x 60 (s) x 60(m) x 24(h) x 14(d)
