@@ -86,7 +86,7 @@ public class TokenManager {
     // [service] 서비스 토큰 검증
     public void validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(tokenSecret.getBytes(StandardCharsets.UTF_8)) // 시크릿키를 이용해 서명검증
+            Jwts.parser().setSigningKey(tokenSecret.getBytes(StandardCharsets.UTF_8)) // 시크릿키를 이용해 서버의 개인키로 복호화 = 서명검증
                     .parseClaimsJws(token);
         } catch (ExpiredJwtException e) {
             log.info("token 만료", e);
