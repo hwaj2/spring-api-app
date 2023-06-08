@@ -1,5 +1,5 @@
 package com.app.domain.member.constant;
 
 public enum MemberType {
-    KAKAO, NAVER
+    KAKAO, NAVER, GOOGLE, FACEBOOK, APPLE
 }
