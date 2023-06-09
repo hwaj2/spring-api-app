@@ -25,7 +25,7 @@ public class KakaoUserInfoResponseDto {
 
         @Getter @Setter
         public static class Profile{
-            private String nickName; // 닉네임
+            private String nickname; // 닉네임
             @JsonProperty("thumbnail_image_url") /* 카멜 케이스로 받을수 있도록 사용 */
             private String thumbnailImageUrl; // 프로필 미리보기 이미지 url
         }
