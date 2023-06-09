@@ -16,6 +16,6 @@ public enum MemberType {
         List<MemberType> memberTypes = Arrays.stream(MemberType.values())
                 .filter(memberType -> memberType.name().equals(type))
                 .collect(Collectors.toList());
-        return memberTypes.size()!=0 ? true : false;
+        return memberTypes.size()!=0;
     }
 }

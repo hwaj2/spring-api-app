@@ -4,7 +4,7 @@ import com.app.domain.member.constant.MemberType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
-@Getter @Setter
+// Oauth 로그인 요청 • 응답 dto
 public class OauthLoginDto {
 
     @Getter @Setter
@@ -22,6 +22,7 @@ public class OauthLoginDto {
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private String accessTokenExpireTime;
+
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private String refreshTokenExpireTime;
 

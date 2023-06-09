@@ -5,7 +5,6 @@ import com.app.api.external.oauth.service.SocialLoginApiService;
 import com.app.api.external.oauth.service.SocialLoginApiServiceFactory;
 import com.app.api.login.dto.OauthLoginDto;
 import com.app.domain.member.constant.MemberType;
-import com.app.domain.member.entity.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

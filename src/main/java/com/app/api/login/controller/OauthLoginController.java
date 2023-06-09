@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+// Oauth 로그인 요청 controller
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/oauth")
@@ -19,10 +20,14 @@ public class OauthLoginController {
     private final OauthValidator oauthValidator;
     private final OauthLoginService oauthLoginService;
 
+    // 로그인 요청
     @PostMapping("/login")
     public ResponseEntity<OauthLoginDto.Response> oauthLogin(@RequestBody OauthLoginDto.Request oauthLoginRequestDto,
                                                     HttpServletRequest httpServletRequest){
+        // 클라이언트가 헤더에 액세스토큰을 담아서 HTTP요청
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
+
+        // Authorization 헤더 검증
         oauthValidator.validationAuthorization(authorizationHeader);
         oauthValidator.validateMemberType(oauthLoginRequestDto.getMemberType());
 

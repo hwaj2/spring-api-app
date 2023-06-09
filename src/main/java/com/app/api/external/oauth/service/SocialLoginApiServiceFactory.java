@@ -15,17 +15,18 @@ public class SocialLoginApiServiceFactory {
         this.socialLoginApiServices = socialLoginApiServices;
     }
 
-    //  MemberType(KAKAO,NAVER,GOOGLE...)에 따라서 구현체를 주입
+
+    // 회원 타입에 따른 SocialLoginApiService 구현체 반환
     public static SocialLoginApiService getSocialLoginApiService(MemberType memberType){
 
         String socialLoginApiServiceBeanName = "";
 
         if(MemberType.KAKAO.equals(memberType)){
-            socialLoginApiServiceBeanName = "KakaoLoginApiServiceImpl";
+            socialLoginApiServiceBeanName = "kakaoLoginApiServiceImpl";
         }else if(MemberType.NAVER.equals(memberType)){
-            socialLoginApiServiceBeanName = "NaverLoginApiServiceImpl";
+            socialLoginApiServiceBeanName = "naverLoginApiServiceImpl";
         }else if(MemberType.GOOGLE.equals(memberType)){
-            socialLoginApiServiceBeanName = "GoogleLoginApiServiceImpl";
+            socialLoginApiServiceBeanName = "googleLoginApiServiceImpl";
         }
         return socialLoginApiServices.get(socialLoginApiServiceBeanName);
     }
