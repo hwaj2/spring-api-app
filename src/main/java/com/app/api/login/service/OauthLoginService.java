@@ -36,9 +36,9 @@ public class OauthLoginService {
         JwtTokenDto jwtTokenDto;
 
         // 신규회원 및 기존회원 처리
-        Optional<Member> optionalMember = memberService.findMemberByEmail(userInfo.getEmail());
+        Optional<Member> findMember = memberService.findMemberByEmail(userInfo.getEmail()); //회원여부확인
 
-        if (optionalMember.isEmpty()) {  // 신규회원
+        if (findMember.isEmpty()) {  // 신규회원
             Member oauthMember = userInfo.toMemberEntity(memberType, Role.ADMIN);
             memberService.registerMember(oauthMember);
             /* 서비스 토큰 발급 */
@@ -47,14 +47,14 @@ public class OauthLoginService {
             log.info("소셜로그인 신규회원 JWT 토큰발급 완료!!");
 
         }else{  // 기존회원
-            Member oauthMember = optionalMember.get();
+            Member oauthMember = findMember.get();
             /* 서비스 토큰 발급 */
             jwtTokenDto = tokenManager.createJwtTokenDto(oauthMember.getMemberId(), oauthMember.getRole());
             oauthMember.updateRefreshToken(jwtTokenDto);
             log.info("소셜로그인 기존회원 JWT 토큰발급 완료!!");
         }
 
-        return OauthLoginDto.Response.of(jwtTokenDto);
+        return OauthLoginDto.Response.of(jwtTokenDto); // oauth 로그인 응답(토큰생성)
 
     }
 

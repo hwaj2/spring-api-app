@@ -23,6 +23,7 @@ public class KakaoLoginApiServiceImpl implements SocialLoginApiService {
     private final KakaoUserInfoClient kakaoUserInfoClient;
     private final String CONTENT_TYPE = "application/x-www-form-urlencoded;charset=utf-8";
 
+    // 사용자 정보 가져오기
     @Override
     public OauthAttributes getUserInfo(String accessToken) {
 

@@ -24,13 +24,14 @@ public class OauthLoginController {
     @PostMapping("/login")
     public ResponseEntity<OauthLoginDto.Response> oauthLogin(@RequestBody OauthLoginDto.Request oauthLoginRequestDto,
                                                     HttpServletRequest httpServletRequest){
-        // 클라이언트가 헤더에 액세스토큰을 담아서 HTTP요청
+        // 클라이언트가 헤더에 액세스토큰을 담아서 HTTP요청함
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
 
         // Authorization 헤더 검증
         oauthValidator.validationAuthorization(authorizationHeader);
         oauthValidator.validateMemberType(oauthLoginRequestDto.getMemberType());
 
+        // 헤더안에 accessToken으로 oauth 로그인
         String accessToken = authorizationHeader.split(" ")[1];
         OauthLoginDto.Response jwtTokenResponseDto = oauthLoginService.oauthLogin(accessToken, MemberType.from(oauthLoginRequestDto.getMemberType()));
 

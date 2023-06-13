@@ -19,6 +19,7 @@ public class MemberService {
     private final  MemberRepository memberRepository;
 
     // 회원가입
+    @Transactional
     public Member registerMember(Member member){
         validateDuplicateMember(member);
         return memberRepository.save(member);
