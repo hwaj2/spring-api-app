@@ -4,11 +4,14 @@ package com.app.domain.member.serivce;
 import com.app.domain.member.entity.Member;
 import com.app.domain.member.repository.MemberRepository;
 import com.app.global.error.ErrorCode;
+import com.app.global.error.exception.AuthenticationException;
 import com.app.global.error.exception.BusinessException;
+import com.app.global.jwt.service.TokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -34,8 +37,20 @@ public class MemberService {
     }
 
 
+
     public Optional<Member> findMemberByEmail(String email){
         return memberRepository.findByEmail(email);
     }
 
+
+    public Member findMemberByRefreshToken(String refreshToken){
+        Member member =  memberRepository.findByRefreshToken(refreshToken)
+                .orElseThrow(()-> new AuthenticationException(ErrorCode.REFRESH_TOKEN_NOT_FOUND));
+
+        LocalDateTime tokenExpirationTime = member.getTokenExpirationTime();
+        if(tokenExpirationTime.isBefore(LocalDateTime.now())){
+            throw new AuthenticationException(ErrorCode.REFRESH_TOKEN_EXPIRED);
+        }
+        return member;
+    }
 }
