@@ -15,9 +15,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 //실제 DB의 테이블과 매칭될 Entity클래스
-@Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 public class Member extends BaseEntity {
 
     @Id //pk
@@ -63,6 +63,11 @@ public class Member extends BaseEntity {
     public void updateRefreshToken(JwtTokenDto jwtTokenDto){
         this.refreshToken = jwtTokenDto.getRefreshToken();
         this.tokenExpirationTime = DateTimeUtils.convertToLocalDateTime(jwtTokenDto.getRefreshTokenExpireTime());
+    }
+
+    public void expireRefreshToken(LocalDateTime now){
+        this.tokenExpirationTime = now;
+
     }
 
 

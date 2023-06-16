@@ -6,7 +6,7 @@ import com.app.domain.member.repository.MemberRepository;
 import com.app.global.error.ErrorCode;
 import com.app.global.error.exception.AuthenticationException;
 import com.app.global.error.exception.BusinessException;
-import com.app.global.jwt.service.TokenManager;
+import com.app.global.error.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,5 +52,12 @@ public class MemberService {
             throw new AuthenticationException(ErrorCode.REFRESH_TOKEN_EXPIRED);
         }
         return member;
+    }
+
+
+    public Member findMemberByMemberId(Long memberId){
+        return memberRepository.findById(memberId)
+                .orElseThrow(()-> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));
+
     }
 }
