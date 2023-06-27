@@ -3,6 +3,8 @@ package com.app.api.member.controller;
 import com.app.api.member.dto.MemberInfoResponseDto;
 import com.app.api.member.service.MemberInfoService;
 import com.app.global.jwt.service.TokenManager;
+import com.app.global.resolver.memberinfo.MemberInfo;
+import com.app.global.resolver.memberinfo.MemberInfoDto;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,15 @@ public class MemberInfoController {
     private final TokenManager tokenManager;
     private final MemberInfoService memberInfoService;
 
+
     @GetMapping("/info")
+    public ResponseEntity<MemberInfoResponseDto> getMemberInfoArgumentResolver(@MemberInfo MemberInfoDto memberInfoDto) {
+        Long memberId = memberInfoDto.getMemberId();
+        MemberInfoResponseDto memberInfoResponseDto = memberInfoService.getMemberInfo(memberId);
+        return ResponseEntity.ok(memberInfoResponseDto);
+    }
+
+    @GetMapping("/info1")
     public ResponseEntity<MemberInfoResponseDto> getMemberInfo(@RequestHeader("Authorization") String authorizationHeader) {
 
         String accessToken = authorizationHeader.split(" ")[1];
@@ -29,5 +39,7 @@ public class MemberInfoController {
         MemberInfoResponseDto memberInfoResponseDto = memberInfoService.getMemberInfo(memberId);
         return ResponseEntity.ok(memberInfoResponseDto);
     }
+
+
 
 }
