@@ -1,5 +1,6 @@
 package com.app.global.config.web;
 
+import com.app.global.interceptor.AdminAuthorizationInterceptor;
 import com.app.global.interceptor.AuthenticationInterceptor;
 import com.app.global.resolver.memberinfo.MemberInfoArgumentResolver;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     private final AuthenticationInterceptor authenticationInterceptor;
     private final MemberInfoArgumentResolver memberInfoArgumentResolver;
+    private final AdminAuthorizationInterceptor adminAuthorizationInterceptor;
 
     // CORS
     @Override
@@ -34,13 +36,19 @@ public class WebConfig implements WebMvcConfigurer {
                        );
     }
 
-    // API 인증 인터셉터
+    // 인증,인가 인터셉터
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
         registry.addInterceptor(authenticationInterceptor)
                 .order(1)
                 .addPathPatterns("/api/**")
                 .excludePathPatterns("/api/oauth/login", "/api/access-token/issue", "/api/logout", "/api/health");
+
+
+        registry.addInterceptor(adminAuthorizationInterceptor)
+                .order(2)
+                .addPathPatterns("/api/admin/**");
     }
 
     // ArgumentResolvers
